@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
 +==============================================================+
-|       Domain Availability Checker v3.0 - Multi-TLD           |
+|            Domain Vestor v1.0 - Multi-TLD                    |
 |   Check domains across .ai .com .io .dev .app .co & more     |
 |       WHOIS/RDAP + DNS + HTTP multi-signal checks            |
 +==============================================================+
 
 Usage:
-    python domain_checker.py --file domains.txt                    # Default: .ai .com .io .dev
-    python domain_checker.py --file domains.txt --tlds ai com io   # Specific TLDs
-    python domain_checker.py --file domains.txt --all              # ALL 15 TLDs
-    python domain_checker.py --file domains.txt --cheap            # Budget TLDs only
-    python domain_checker.py promptcraft nexiq --tlds ai com io    # Inline domains
-    python domain_checker.py --file domains.txt --csv --open       # Export + open in browser
+    python domain_vestor.py --file domains.txt                    # Default: .ai .com .io .dev
+    python domain_vestor.py --file domains.txt --tlds ai com io   # Specific TLDs
+    python domain_vestor.py --file domains.txt --all              # ALL 15 TLDs
+    python domain_vestor.py --file domains.txt --cheap            # Budget TLDs only
+    python domain_vestor.py promptcraft nexiq --tlds ai com io    # Inline domains
+    python domain_vestor.py --file domains.txt --csv --open       # Export + open in browser
 
 Requirements:
     pip install rich requests python-whois dnspython
@@ -108,7 +108,7 @@ class DomainChecker:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
-            "User-Agent": "DomainChecker/3.0 (research-tool)",
+            "User-Agent": "DomainVestor/1.0 (research-tool)",
             "Accept": "application/rdap+json, application/json",
         })
 
@@ -251,9 +251,9 @@ class Dashboard:
     def banner():
         console.print()
         console.print(Panel(
-            "[bold white]Domain Availability Checker v3.0[/bold white]\n"
+            "[bold white]Domain Vestor v1.0[/bold white]\n"
             "[dim]WHOIS/RDAP + DNS + HTTP | Multi-TLD Matrix[/dim]",
-            title="[bold cyan]DOMAIN CHECKER[/bold cyan]", border_style="cyan", width=58))
+            title="[bold cyan]DOMAIN VESTOR[/bold cyan]", border_style="cyan", width=58))
 
     @staticmethod
     def show_tlds(tlds):
@@ -447,7 +447,7 @@ def export_json(results, fname="domain_results.json"):
 
 def main():
     p = argparse.ArgumentParser(
-        description="Domain Checker v3.0 - Multi-TLD Matrix",
+        description="Domain Vestor v1.0 - Multi-TLD Matrix",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=f"""
 TLD Presets:
