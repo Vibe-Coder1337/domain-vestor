@@ -345,18 +345,27 @@ class Dashboard:
         t = Table(title=f"[bold green]Available for Registration ({len(avail)})[/bold green]",
                   box=box.ROUNDED, border_style="green")
         t.add_column("#", style="dim", width=4)
-        t.add_column("Domain", style="bold", min_width=20)
+        t.add_column("Domain", style="bold", min_width=22)
         t.add_column("TLD", justify="center", width=6)
         t.add_column("Conf", justify="center", width=5)
-        t.add_column("Price/yr", justify="right", width=14)
-        t.add_column("Buy Link (GoDaddy)", min_width=30, style="dim")
+        t.add_column("Price/yr (INR)", justify="right", width=16)
 
         for i, a in enumerate(avail, 1):
             col = TLD_CONFIG.get(a["tld"],{}).get("color","white")
-            gd = REGISTRAR_URLS["GoDaddy"].format(domain=a["fqdn"])
             t.add_row(str(i), a["fqdn"], f"[{col}].{a['tld']}[/{col}]",
-                      f"{a['conf']}%", f"[yellow]{a['price']}[/yellow]", gd[:58])
+                      f"{a['conf']}%", f"[yellow]{a['price']}[/yellow]")
         console.print(t)
+
+        # Print full buy links BELOW the table (not truncated)
+        console.print()
+        console.print(Panel("[bold]Buy Links — Copy full URL to browser[/bold]", border_style="cyan"))
+        for i, a in enumerate(avail, 1):
+            fqdn = a["fqdn"]
+            console.print(f"\n  [bold white]{i}. {fqdn}[/bold white]")
+            console.print(f"     [cyan]GoDaddy  :[/cyan] https://www.godaddy.com/en-in/domainsearch/find?domainToCheck={fqdn}")
+            console.print(f"     [cyan]Namecheap:[/cyan] https://www.namecheap.com/domains/registration/results/?domain={fqdn}")
+            console.print(f"     [cyan]BigRock  :[/cyan] https://www.bigrock.in/domain-registration/search?domain={fqdn}")
+
         return avail
 
     @staticmethod
